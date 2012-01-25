@@ -1,0 +1,29 @@
+/*
+ * This is a manifest file that'll automatically include all the stylesheets available in this directory
+ * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
+ * the top of the compiled file, but it's generally better to create a new file per style scope.
+ *= require_self
+ *= require_tree . 
+*/
+
+.logo a, a:hover, a:visited, a:active {
+  color: black !important;
+  text-decoration: none !important;
+}
+
+#load_time {
+  color: #CCC;
+  padding-top: 15px;
+}
+
+.button_to input {
+  background:url(/assets/trash_icon.jpg) no-repeat;
+  border: 0;
+  box-shadow: none !important;
+  width: 16px !important;
+  height: 16px !important;
+}
+
+#deletedFriendsSorted form {
+  margin-bottom: 0 !important;
+}

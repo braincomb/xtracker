@@ -1,0 +1,93 @@
+<p></p>
+<h6 style="margin-bottom: 0; line-height: 20px;">Description</h6>
+<div>This application will list deleted users from your contact list when any of the following has occured: 
+someone has deleted (or blocked) you, you have deleted (or blocked) someone, someone has disabled their facebook account.
+Remember to visit this application frequently, whenever there have been any changes to your contact list, to keep the records accurate.</div>
+<p>&nbsp;</p>
+
+<script>
+$(function() {
+$("table#currentFriendsSorted").tablesorter({ sortList: [[1,0]] });
+});
+</script>
+<script>
+$(function() {
+$("table#deletedFriendsSorted").tablesorter({ sortList: [[2,1,0]] });
+});
+</script>
+<script>
+$(function() {
+    $('#currentFriendsTab').click(function() {
+      $('#currentFriendsSorted').fadeToggle('slow', function() {
+        // Animation complete
+      });
+    });
+});
+</script>
+
+<%- flash.each do |key, msg| -%>
+<div class="alert-message info fade in" data-alert="alert">
+<a class="close" href="#">×</a>
+<p><%= msg %></p>
+</div>
+<%- end -%>
+
+<div id="deletedFriendsTab"><h5 class="tab">Deleted Contacts<div style="position: relative; bottom: 10px;"><span class="pull-right label num" id="numOfDeletions"><%= @deletions.length %></span></div></h5></div>
+<% if @deletions.length == 0 %>
+<p>No activity to report, yet...</p>
+<% else %>
+      <table class="bordered-table zebra-striped" id="deletedFriendsSorted">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>ID</th>
+            <th>Recorded on</th>
+            <th>Remove?</th>
+          </tr>
+        </thead>
+        <tbody>
+<% @deletions.each do |d| %>
+          <tr id="deletion_<%= d.id %>">
+            <td><%= d.name %></td>
+            <td><a href="http://www.facebook.com/profile.php?id=<%= d.fbid %>" target="_blank"><%= d.fbid %></a></td>
+            <td><%= d.created_at %></td>
+            <td width="11%"><%= button_to "", { :controller => "deletions", :action => "destroy", :id => d.id, :user_id => d.user_id }, :method => :delete, :disable_with => '', :remote => true, :onclick => "deleteUnfriendEntry(#{d.id})" %></td>
+          </tr>
+<% end %>
+        </tbody>
+      </table>
+<% end %>
+<p></p>
+
+
+<div id="currentFriendsTab" style="cursor: pointer;"><h5 class="tab">Current Friends<div style="position: relative; bottom: 10px;"><span class="pull-right label num" id="numOfFriends" rel="popover" data-content="You may see a slightly lower number of friends than you actually have, if that is the case then some of your friends have opted-out from the Facebook platform, and are invisible to all apps." data-original-title="notice" data-placement="below"><%= @current_friends.length %></span></div></h5></div>
+          <script>
+            $(function () {
+              $("span[rel=popover]")
+                .popover({
+                  offset: 10
+                })
+                .click(function(e) {
+                  e.preventDefault()
+                })
+            })
+          </script>
+      <table class="bordered-table zebra-striped" id="currentFriendsSorted" style="display: none;">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>ID</th>
+          </tr>
+        </thead>
+        <tbody>
+<% @current_friends.each do |f| %>
+          <tr>
+            <td></td>
+            <td><%= f['name'] %></td>
+            <td><%= f['id'] %></td>
+          </tr>
+<% end %>
+        </tbody>
+      </table>
+

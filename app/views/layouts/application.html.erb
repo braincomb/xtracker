@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>XTracker</title>
+<%= stylesheet_link_tag    "application" %>
+<%= javascript_include_tag "application" %>
+<%= csrf_meta_tags %>
+<base target="_parent" />
+</head>
+<body>
+<p></p>
+<div class="container canvas">
+<h1 style="margin-bottom: 0;"><a href="<%= CANVAS_URL %>" class="logo">XTracker</a></h1>
+<img src="/assets/rails_powered.gif" alt="" />
+<p>&nbsp;</p>
+<%= yield %>
+
+<div id="load_time"><%= "loaded in: #{Time.now-@start_time} seconds" %> | <%= APP_VERSION %></div>
+</div>
+</body>
+</html>
