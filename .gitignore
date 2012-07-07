@@ -13,3 +13,9 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
+
+# Ignore Facebook API conf file
+/config/facebook.yml
+
+# Ignore secret token file
+/config/initializers/secret_token.rb
