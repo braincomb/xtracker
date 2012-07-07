@@ -60,7 +60,7 @@ $(function() {
 <p></p>
 
 
-<div id="currentFriendsTab" style="cursor: pointer;"><h5 class="tab">Current Friends<div style="position: relative; bottom: 10px;"><span class="pull-right label num" id="numOfFriends" rel="popover" data-content="You may see a slightly lower number of friends than you actually have, if that is the case then some of your friends have opted-out from the Facebook platform, and are invisible to all apps." data-original-title="notice" data-placement="below"><%= @current_friends.length %></span></div></h5></div>
+<div id="currentFriendsTab" style="cursor: pointer;"><h5 class="tab">Current Friends<div style="position: relative; bottom: 10px;"><span class="pull-right label num" id="numOfFriends" rel="popover" data-content="You may see a slightly lower number of friends than you actually have, if that is the case then some of your friends have opted-out from the Facebook platform, and are invisible to all apps." data-original-title="notice" data-placement="above"><%= @current_friends.length %></span></div></h5></div>
           <script>
             $(function () {
               $("span[rel=popover]")
