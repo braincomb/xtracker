@@ -28,4 +28,12 @@ namespace :deploy do
   task :restart, :roles => :app, :except => { :no_release => true } do
     run "#{try_sudo} touch #{File.join(current_path,'tmp','restart.txt')}"
   end
+
+  # Relink SQLite files
+  desc "relink db directory"
+  task :resymlink, :roles => :app do
+    run "rm -rf #{current_path}/db && ln -s #{shared_path}/db #{current_path}/db"
+  end
 end
+
+after 'deploy:update', 'deploy:resymlink'
