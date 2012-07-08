@@ -5,7 +5,7 @@ before_filter :check_ref
     if ( request.headers['referer'] =~ /facebook/ )
       # change this logic
     else
-      redirect_to CALLBACK_URL + "/" + request.path_parameters[:controller] + "/" + request.path_parameters[:action] and return
+      redirect_to Facebook::CALLBACK_URL + "/" + request.path_parameters[:controller] + "/" + request.path_parameters[:action] and return
     end
   end
 
