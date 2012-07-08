@@ -10,7 +10,7 @@ before_filter :check_ref
   end
 
   def index
-    @oauth = Koala::Facebook::OAuth.new(Facebook::APP_ID.to_s, Facebook::SECRET.to_s, Facebook::CALLBACK_URL.to_s)
+    @oauth = Koala::Facebook::OAuth.new
     if (session[:access_token].blank?)
       @signed_request = @oauth.parse_signed_request(params[:signed_request])
       if @signed_request["user_id"]  
