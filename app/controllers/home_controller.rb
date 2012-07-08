@@ -1,25 +1,22 @@
-#require 'json'
-
 class HomeController < ApplicationController
 before_filter :check_ref
 
   def check_ref
     if ( request.headers['referer'] =~ /facebook/ )
-      #flash[:notice] = "Incorrect Referer Header"
-      #redirect_to :action => 'index'
+      # change this logic
     else
-      redirect_to CANVAS_URL + "/" + request.path_parameters[:controller] + "/" + request.path_parameters[:action] and return
+      redirect_to CALLBACK_URL + "/" + request.path_parameters[:controller] + "/" + request.path_parameters[:action] and return
     end
   end
 
   def index
-    @oauth = Koala::Facebook::OAuth.new
+    @oauth = Koala::Facebook::OAuth.new(Facebook::APP_ID.to_s, Facebook::SECRET.to_s, Facebook::CALLBACK_URL.to_s)
     if (session[:access_token].blank?)
       @signed_request = @oauth.parse_signed_request(params[:signed_request])
       if @signed_request["user_id"]  
         @graph = Koala::Facebook::API.new(@signed_request["oauth_token"])
       else
-        redirect_to @oauth.url_for_oauth_code and return
+        render :partial => "oauth_redirect" and return
       end 
     end
 

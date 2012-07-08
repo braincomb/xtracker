@@ -1,0 +1,6 @@
+<script>
+  var oauth_url = 'https://www.facebook.com/dialog/oauth/';
+  oauth_url += '?client_id=<%= Facebook::APP_ID %>';
+  oauth_url += '&redirect_uri=' + encodeURIComponent('<%= Facebook::CALLBACK_URL %>');
+  window.top.location = oauth_url;
+</script>
