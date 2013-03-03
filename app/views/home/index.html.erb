@@ -1,3 +1,4 @@
+
 <p></p>
 <h6 style="margin-bottom: 0; line-height: 20px;">Description</h6>
 <div>This application will list deleted users from your contact list when any of the following has occured: 
@@ -32,7 +33,29 @@ $(function() {
 </div>
 <%- end -%>
 
+<!-- delete all history modal -->
+<div class="modal fade hide" id="delete-all-confirm">
+  <div class="modal-header">
+    <a class="close">×</a>
+    <h3>Clear all history?</h3>
+  </div>
+  <div class="modal-body">
+    <p>This will clear all your unfriended history. Are you sure?</p>
+  </div>
+  <div class="modal-footer">
+    <%= link_to 'Yes, Clear', { :controller => "deletions", :action => "destroy_all", :user_id => @user }, :class => 'btn danger delete-all-btn', :method => :delete, :remote => true %>
+    <a class="btn secondary" onclick="$('#delete-all-confirm').modal('hide')">Cancel</a>
+  </div>
+</div>
+
 <div id="deletedFriendsTab"><h5 class="tab">Deleted Contacts<div style="position: relative; bottom: 10px;"><span class="pull-right label num" id="numOfDeletions"><%= @deletions.length %></span></div></h5></div>
+<% if @deletions.length >= 1  %>
+<div id="clear_history">
+  <p style="float:left;color:#666;">
+  <button class="btn" data-keyboard="true" data-backdrop="true" data-controls-modal="delete-all-confirm">Delete All History?</button>
+  </p>
+</div>
+<% end %>
 <% if @deletions.length == 0 %>
 <p>No activity to report, yet...</p>
 <% else %>

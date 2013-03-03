@@ -10,4 +10,4 @@ See it live at http://apps.facebook.com/_xtracker
 
 ## Disclaimer 
 
-This was my very first Ruby on Rails project, so don't expect the code to be optimized. Refactoring this code is defindetely on my TODO list.
+This was my very first Ruby on Rails project, so don't expect the code to be optimized. Refactoring this code is definetely on my TODO list.
